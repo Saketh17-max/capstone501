@@ -17,7 +17,7 @@ function CreateSession() {
       try {
         const { data } = await api.get("/sports");
         setSports(data.sports);
-      } catch (error) {
+      } catch {
         setError("Failed to load sports");
       }
     };
@@ -49,7 +49,7 @@ function CreateSession() {
     <div>
       <h1>Create Sport Session</h1>
 
-      {error && <p>{error}</p>}
+      {error && <div className="error-message">{error}</div>}
 
       <form onSubmit={handleSubmit}>
         <select
@@ -66,16 +66,12 @@ function CreateSession() {
           ))}
         </select>
 
-        <br />
-
         <input
           type="datetime-local"
           value={date}
           onChange={(e) => setDate(e.target.value)}
           required
         />
-
-        <br />
 
         <input
           type="text"
@@ -84,8 +80,6 @@ function CreateSession() {
           onChange={(e) => setVenue(e.target.value)}
           required
         />
-
-        <br />
 
         <input
           type="number"
@@ -97,9 +91,6 @@ function CreateSession() {
           }
           required
         />
-
-        <br />
-
         <button type="submit">Create Session</button>
       </form>
     </div>

@@ -21,6 +21,7 @@ function AdminDashboard() {
   };
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     loadSports();
   }, []);
 
@@ -67,13 +68,9 @@ function AdminDashboard() {
 
   return (
     <div>
-      <h1>Admin Dashboard</h1>
+      <h2 className="mb-2">Admin Panel</h2>
 
-      <p>Welcome, {user?.name}</p>
-
-      <button onClick={logout}>Logout</button>
-
-      {error && <p>{error}</p>}
+      {error && <div className="error-message">{error}</div>}
 
       <hr />
 
@@ -98,16 +95,18 @@ function AdminDashboard() {
 
       <h2>Manage Sports</h2>
 
-      {sports.map((sport) => (
-        <div key={sport._id}>
-          <strong>{sport.name}</strong>
-          <span> - {sport.description}</span>
+      <div className="grid">
+        {sports.map((sport) => (
+          <div key={sport._id} className="card">
+            <h3>{sport.name}</h3>
+            <p>{sport.description}</p>
 
-          <button onClick={() => deleteSport(sport._id)}>
-            Delete
-          </button>
-        </div>
-      ))}
+            <button onClick={() => deleteSport(sport._id)}>
+              Delete
+            </button>
+          </div>
+        ))}
+      </div>
 
       <hr />
 
@@ -128,7 +127,7 @@ function AdminDashboard() {
       <button onClick={loadReport}>Generate Report</button>
 
       {report && (
-        <div>
+        <div className="card mt-2">
           <h3>Sessions Played</h3>
           <p>{report.sessionsPlayed}</p>
 

@@ -14,12 +14,7 @@ const app = express();
 
 connectDB();
 
-app.use(
-  cors({
-    origin: process.env.CLIENT_URL,
-    credentials: true,
-  })
-);
+app.use(cors());
 
 app.use(express.json());
 
@@ -37,6 +32,6 @@ app.use("/api/sports", sportRoutes);
 app.use("/api/sessions", sessionRoutes);
 app.use("/api/reports", reportRoutes);
 
-app.listen(PORT, () => {
+app.listen(PORT,"0.0.0.0", () => {
   console.log(`Server running on port ${PORT}`);
 });

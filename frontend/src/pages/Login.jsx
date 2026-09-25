@@ -1,4 +1,3 @@
-```jsx
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
@@ -37,12 +36,11 @@ function Login() {
       <h1>Sports Scheduler</h1>
       <h2>Login</h2>
 
-      {error && <p>{error}</p>}
+      {error && <div className="error-message">{error}</div>}
 
       <form onSubmit={handleSubmit}>
         <div>
           <label>Email</label>
-          <br />
           <input
             type="email"
             value={email}
@@ -52,11 +50,8 @@ function Login() {
           />
         </div>
 
-        <br />
-
         <div>
           <label>Password</label>
-          <br />
           <input
             type="password"
             value={password}
@@ -65,9 +60,6 @@ function Login() {
             required
           />
         </div>
-
-        <br />
-
         <button type="submit">Login</button>
       </form>
 
@@ -80,4 +72,3 @@ function Login() {
 }
 
 export default Login;
-```

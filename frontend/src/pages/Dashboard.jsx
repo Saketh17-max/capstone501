@@ -28,6 +28,7 @@ function Dashboard() {
   };
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     loadSessions();
   }, []);
 
@@ -57,7 +58,7 @@ function Dashboard() {
   };
 
   const SessionCard = ({ session, creator = false }) => (
-    <div>
+    <div className="card">
       <h3>{session.sport?.name}</h3>
 
       <p>Date: {new Date(session.date).toLocaleString()}</p>
@@ -81,54 +82,58 @@ function Dashboard() {
 
   return (
     <div>
-      <h1>Sports Scheduler</h1>
+      <h2 className="mb-2">Dashboard Overview</h2>
 
-      <p>Welcome, {user?.name}</p>
+      <div className="header-actions">
+        <Link to="/sessions/create">
+          <button>Create Session</button>
+        </Link>
+      </div>
 
-      <button onClick={logout}>Logout</button>
-
-      <Link to="/sessions/create">
-        <button>Create Session</button>
-      </Link>
-
-      {error && <p>{error}</p>}
+      {error && <div className="error-message">{error}</div>}
 
       <hr />
 
       <h2>My Created Sessions</h2>
 
-      {mySessions.map((session) => (
-        <SessionCard
-          key={session._id}
-          session={session}
-          creator
-        />
-      ))}
+      <div className="grid">
+        {mySessions.map((session) => (
+          <SessionCard
+            key={session._id}
+            session={session}
+            creator
+          />
+        ))}
+      </div>
 
       <hr />
 
       <h2>Available Sessions</h2>
 
-      {availableSessions.map((session) => (
-        <div key={session._id}>
-          <SessionCard session={session} />
+      <div className="grid">
+        {availableSessions.map((session) => (
+          <div key={session._id}>
+            <SessionCard session={session} />
 
-          <button onClick={() => joinSession(session._id)}>
-            Join Session
-          </button>
-        </div>
-      ))}
+            <button onClick={() => joinSession(session._id)}>
+              Join Session
+            </button>
+          </div>
+        ))}
+      </div>
 
       <hr />
 
       <h2>Joined Sessions</h2>
 
-      {joinedSessions.map((session) => (
-        <SessionCard
-          key={session._id}
-          session={session}
-        />
-      ))}
+      <div className="grid">
+        {joinedSessions.map((session) => (
+          <SessionCard
+            key={session._id}
+            session={session}
+          />
+        ))}
+      </div>
     </div>
   );
 }

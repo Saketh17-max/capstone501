@@ -27,7 +27,7 @@ function Register() {
     <div>
       <h2>Sign Up</h2>
 
-      {error && <p>{error}</p>}
+      {error && <div className="error-message">{error}</div>}
 
       <form onSubmit={handleSubmit}>
         <input
